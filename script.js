@@ -36,5 +36,5 @@ function creatingCards() {
     carta.innerText = 'Por favor, digite o conteúdo da carta.';
   }
 }
-
+// alo
 document.querySelector('#criar-carta').addEventListener('click', creatingCards);
