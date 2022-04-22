@@ -7,43 +7,31 @@ const incl = ['skewleft', 'skewright'];
 const sort = (i) => i[Math.ceil(Math.random() * i.length) - 1];
 
 function addClass(event) {
-  if (event.target !== undefined && event !== event.target) {
-    event = event.target;
+  let a = event;
+  if (event.target !== undefined && a !== event.target) {
+    a = event.target;
   }
-  console.log(event);
-  event.className = '';
-  event.classList.add(sort(mold));
-  event.classList.add(sort(tam));
-  event.classList.add(sort(rot));
-  event.classList.add(sort(incl));
+  a.className = '';
+  a.classList.add(sort(mold));
+  a.classList.add(sort(tam));
+  a.classList.add(sort(rot));
+  a.classList.add(sort(incl));
 }
 
 function creatingCards() {
   const carta = document.querySelector('#carta-gerada');
   const phrase = document.querySelector('#carta-texto').value;
-  let arrayWords = phrase.split(' ');
-  let bool = false;
-  for (let i = 0; i < arrayWords.length; i += 1) {
-    if (arrayWords[i] !== '') {
-      bool = true;
-    }
-  }
-  if (phrase !== '' && bool === true) {
-    // carta.textContent = '';
+  const arraySemVazios = phrase.split(' ');
+  if (phrase !== '' && phrase.trim().length !== 0) {
     carta.textContent = '';
-    for (let i = 0; i < arrayWords.length; i += 1) {
-      if (arrayWords[i] !== ''){
-        const span = document.createElement('span');
-        span.innerText = arrayWords[i];
-        addClass(span);
-        carta.appendChild(span);
-        span.addEventListener('click', addClass);
-      }
+    for (let i = 0; i < arraySemVazios.length; i += 1) {
+      const span = document.createElement('span');
+      span.innerText = arraySemVazios[i];
+      addClass(span);
+      carta.appendChild(span);
+      span.addEventListener('click', addClass);
+      document.querySelector('#carta-contador').innerText = arraySemVazios.length;
     }
-    const contador = document.querySelector('#carta-contador');
-    const tamContador = document.querySelectorAll('span').length;
-
-    contador.textContent = tamContador;
   } else {
     carta.innerText = 'Por favor, digite o conteúdo da carta.';
   }
